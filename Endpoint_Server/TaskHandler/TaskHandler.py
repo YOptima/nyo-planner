@@ -8,7 +8,7 @@ from TaskHandler.Exceptions import CreateTaskError
 from google.cloud import tasks_v2
 from pydantic import UUID4
 
-# Logging COnfigurations
+# Logging Configurations
 import logging
 logger = logging.getLogger(__name__)
 
