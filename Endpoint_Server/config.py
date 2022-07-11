@@ -13,7 +13,7 @@ CONFIGURATION["environment"] = "dev"
 if "environment" in os.environ: CONFIGURATION["environment"] = os.environ.get("environment")
 
 # Importing Logging configurations
-logging_config_path = Path.cwd() / "config_logging.yaml"
+logging_config_path = Path.cwd() / "Logging" / "config.yaml"
 LOGGING_CONFIGURATION: dict = {}
 with open(logging_config_path) as stream:
     LOGGING_CONFIGURATION = yaml.safe_load(stream)
