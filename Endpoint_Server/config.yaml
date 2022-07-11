@@ -1,0 +1,11 @@
+SCOPES:
+  CLOUD_TASK:
+    - https://www.googleapis.com/auth/cloud-platform
+
+
+# Cloud Task Settings
+LOCATION: us-west1
+QUEUE: projects/nyo-yoptima/locations/us-west1/queues/planner-queue
+
+# Configuring Endpoint
+ENDPOINT: https://eomt74vgxpzh3ep.m.pipedream.net
