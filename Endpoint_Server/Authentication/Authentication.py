@@ -15,10 +15,9 @@ from oauth2client import GOOGLE_TOKEN_URI
 from typing import List
 
 # Setting Logging Configuration
+import logging
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.DEBUG)
-handler = logging.StreamHandler(sys.stdout)
-logger.addHandler(handler)
+
 
 class Authentication:
 
@@ -29,7 +28,7 @@ class Authentication:
         CLIENT_SECRET = os.environ.get("CLIENT_SECRET")
         REFRESH_TOKEN = os.environ.get("REFRESH_TOKEN")
         
-        logging.debug(f"[+] Fetching Client Account Credentials")
+        logger.debug(f"[+] Fetching Client Account Credentials")
         credentials = Credentials(
             token = None,
             client_id = CLIENT_ID,
@@ -45,7 +44,7 @@ class Authentication:
     def getServiceAccountCredentials(self, scopes: List[str]) -> Credentials:
         '''Get Service Account Credentials'''
 
-        logging.debug(f"[+] Fetching Service Account Credentials")
+        logger.debug(f"[+] Fetching Service Account Credentials")
         credentials, project_id = default(scopes=scopes)
         return credentials
 

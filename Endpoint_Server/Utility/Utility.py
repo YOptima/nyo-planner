@@ -1,5 +1,9 @@
 import uuid
 
+# Logging Configurations
+import logging
+logger = logging.getLogger(__name__)
+
 # Get Unique Integer ID
 # -- Generated from UUID 
 # -- Maximum 128bit size supported
