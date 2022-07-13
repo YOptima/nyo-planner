@@ -12,6 +12,7 @@ from pydantic import UUID4
 import logging
 logger = logging.getLogger(__name__)
 
+
 class TaskHandler():
     '''Wrapper class to google-cloud-tasksv2 to regulate queing operations'''
 
@@ -21,7 +22,7 @@ class TaskHandler():
     location: str
     queue: str
 
-    def __init__(self):
+    def __init__(self) -> None:
 
         auth_handler = Authentication()
         self.scopes = CONFIGURATION.get("SCOPES").get("CLOUD_TASK")
@@ -35,7 +36,7 @@ class TaskHandler():
 
     # Create HTTP-POST Task
     # -- Authorization - Bearer token
-    def _getPOSTTask(self, endpoint: str, payload: dict, name: str = None) -> dict:
+    def _getPOSTTask(self, endpoint: str, payload: dict, name: str = None, task_id: int = 0) -> dict:
 
         logger.debug(f"[+] Creating Task ...")
 
@@ -52,6 +53,7 @@ class TaskHandler():
                 "url": endpoint, 
                 "headers" : { 
                     "Content-Type" : "application/json",
+                    "X-Request-ID" : str(task_id)
                 },
                 # "oidc_token" : {
                 #     "service_account_email" : self.credentials.service_account_email,
@@ -75,11 +77,11 @@ class TaskHandler():
         logger.debug(f"[+] Task Created : {task}")
         return task
 
-    def enqueueRequest(self, endpoint: str, payload: dict = None, task_id: str = None):
+    def enqueueRequest(self, endpoint: str, payload: dict = None, task_id: str = None) -> dict:
         
         # Get task 
         task_name = f"{self.queue}/tasks/{task_id}"
-        task = self._getPOSTTask(endpoint, payload, task_name)
+        task = self._getPOSTTask(endpoint, payload, task_name, task_id)
 
         try:
             # Enqueue task in queue
@@ -97,6 +99,3 @@ class TaskHandler():
             )
 
         return { "success" : response }
-
-
-        
