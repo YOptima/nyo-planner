@@ -3,6 +3,7 @@ import pydantic
 
 class CreatePlanRequest(BaseModel):
     sheet_id: str
+    global_config_sheet_name: str
     config_sheet_name: str
     data_sheet_name: str
     total_reach: int
@@ -11,6 +12,10 @@ class CreatePlanRequest(BaseModel):
     @pydantic.validator("sheet_id")
     def sheet_id_validator(cls, sheet_id) -> str:
         return sheet_id
+
+    @pydantic.validator("global_config_sheet")
+    def global_config_sheet_name_validator(cls, global_config_sheet_name) -> str:
+        return global_config_sheet_name
 
     @pydantic.validator("config_sheet_name")
     def conifg_sheet_name_validator(cls, config_sheet_name) -> str:
